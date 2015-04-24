@@ -100,27 +100,22 @@ L.Bezierline = L.Path.extend({
 
         for (var j = 0, len2 = points.length, str = '', p; j < len2; j++) {
             p = points[j];
+
             if (round) {
                 p._round();
             }
 
             if (j == 0) {
-              str += 'M' + p.x + ',' + p.y
+              str += 'M' + p.x + ',' + p.y;
             } else {
-              delta = 20;
 
-              if (p.x > prePoint.x) {
-                delta = 20;
-              } else {
-                delta = -20;
+
+              middle1 = {
+                x: p.x,
+                y: prePoint.y
               }
 
-
-              middle = {
-                x: (p.x + prePoint.x) / 2 + delta,
-                y: (p.y + prePoint.y) / 2
-              }
-              str += ' C' + middle.x + ',' + middle.y + ' ' + middle.x + ',' + middle.y + ' ' + p.x + ',' + p.y
+              str += ' Q' + middle1.x + ',' + middle1.y + ' ' + p.x + ',' + p.y;
             }
 
             prePoint = p

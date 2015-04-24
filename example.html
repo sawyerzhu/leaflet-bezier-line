@@ -8,7 +8,7 @@
 
   <style>
     #map {
-      height: 280px;
+      height: 680px;
     }
   </style>
 </head>
@@ -18,8 +18,8 @@
 
   <script>
   var map = new L.Map('map', {
-        center: [52.0, -11.0],
-        zoom: 5,
+        center: [60.0, -11.0],
+        zoom: 2,
         layers: [
             new L.TileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
                 attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
@@ -30,7 +30,13 @@
     });
 
     // --- Arrow, with animation to demonstrate the use of setPatterns ---
-    L.bezierline([[60, -12], [57, -19]], {}).addTo(map);
+    L.bezierline([[60, -12], [57, -19]], {
+      weight: 2
+    }).addTo(map);
+
+    L.bezierline([[57, -19], [60, -12]], {
+      weight: 2
+    }).addTo(map);
 
   </script>
 </body>
