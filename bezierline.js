@@ -13,7 +13,8 @@ L.Bezierline = L.Path.extend({
         // how much to simplify the bezierline on each zoom level
         // more = better performance and smoother look, less = more accurate
         smoothFactor: 1.0,
-        noClip: false
+        noClip: false,
+        showArrow: true
     },
 
     projectLatlngs: function () {
@@ -116,6 +117,26 @@ L.Bezierline = L.Path.extend({
               }
 
               str += ' Q' + middle1.x + ',' + middle1.y + ' ' + p.x + ',' + p.y;
+
+              delta = 5;
+
+              if (p.y > prePoint.y) {
+                delta = -5
+              }
+
+              if (this.options.showArrow === true) {
+
+                if (p.y === prePoint.y) {
+
+                  if (p.x > prePoint.x) {
+                    delta = -5
+                  }
+
+                  str += this._drawArrow(p, {x: p.x + delta, y: p.y - 3}, {x: p.x + delta, y: p.y + 3})
+                } else {
+                  str += this._drawArrow(p, {x: p.x - 3, y: p.y + delta}, {x: p.x + 3, y: p.y + delta})
+                }
+              }
             }
 
             prePoint = p
@@ -178,6 +199,10 @@ L.Bezierline = L.Path.extend({
         this._simplifyPoints();
 
         L.Path.prototype._updatePath.call(this);
+    },
+
+    _drawArrow: function(p1, p2, p3) {
+      return "M" + p1.x + ',' + p1.y + 'L' + p2.x + ',' + p2.y + 'L' + p3.x + ',' + p3.y + 'z'
     }
 });
 
