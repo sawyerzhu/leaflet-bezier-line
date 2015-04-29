@@ -142,7 +142,7 @@ L.Bezierline = L.Path.extend({
             prePoint = p
         }
 
-        console.log(str)
+        // console.log(str)
 
         // str = 'M10,20 c0,150 0,150 300,0'
 
